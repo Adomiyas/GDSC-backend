@@ -1,0 +1,9 @@
+1, What is node.js? (in your own words)
+         It a platform that use to run javascript code outside a browser
+2, What engine does nodeJs run on?
+         Nodejs runs on V8 javascript engine
+3, What command is used to initialize a new project in nodeJs? 
+         npm init (project name)
+4, Explain one NodeJs feature of your choice (simply and in your own words).
+         it is asynchronous. This means it doesnt wait for previous tasks to be completed to proceed with the next one and this feature made it to efficiently handle heavy input and output operations. It can
+        
