@@ -1,0 +1,68 @@
+const fs=require('fs')
+const path=require('path')
+const file= path.join(__dirname, 'command.txt');
+function manage(data){
+
+    const to_do=data.split(" ");
+    
+    if (to_do[0]=="create" && to_do[1]=="a" && to_do[2]=="file"){
+        const filename=to_do[3]
+        try{
+        fs.writeFileSync(filename,'', 'utf8')
+        console.log("created a file: "+ filename)
+        }
+        catch(err){
+            console.log(err)
+        }}
+
+    else if (to_do[0]=="add" && to_do[1]=="to" && to_do[2]=="the" &&to_do[3]=="file"){
+        const filename=to_do[4]
+        try{
+        fs.appendFileSync(filename,'','utf8');
+        console.log("Added the file: "+ filename)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    
+    else if (to_do[0]=="delete" && to_do[1]=="the" && to_do[2]=="file"){
+        const filename=to_do[3]
+        try{
+        fs.unlinkSync(filename);
+        console.log("Deleted the file: "+ filename)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    
+    else if (to_do[0]=="rename" && to_do[1]=="the" && to_do[2]=="file" && to_do[4]=="to"){
+        const filename=to_do[3]
+        const newfilename=to_do[to_do.length-1]
+        try{
+       fs.renameSync(filename, newfilename)
+       console.log("Renamed the file: "+ filename+ " to" + newfilename)
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    else{
+        console.log("Hey! Your have entered incorrect command ")
+    }
+
+    }
+
+
+
+fs.writeFileSync('command.txt', "create a file newFilename", 'utf8');
+fs.watch('command.txt', (typeevent, filename)=>{
+    if (typeevent=="change"){
+        var data=fs.readFileSync('command.txt');
+        data=data.toString()
+        manage(data.toLowerCase())
+    }
+
+});
+console.log("Watching the file command.txt for a change" +file)
